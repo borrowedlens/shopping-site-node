@@ -1,0 +1,71 @@
+<%- include('../includes/start.ejs') %>
+
+<link rel="stylesheet" href="/css/product.css" />
+<%- include('../includes/navigation.ejs') %>
+
+<main>
+    <% if (errorMessage) { %>
+    <div class="user-message error-message"><%= errorMessage %></div>
+    <% } %>
+    <form
+        action="/admin/<% if(edit) { %>edit-product<% } else { %>add-product<% } %>"
+        method="POST"
+        class="form-container"
+        enctype="multipart/form-data"
+    >
+        <div class="form-control">
+            <label class="label-text" for="title">title:</label>
+            <input
+                type="text"
+                name="title"
+                class="form-input <%= validationErrors.find(e => e.param === 'title') ? 'invalid' : '' %>"
+                value="<% if(edit || hasError) { %><%= product.title %><% } %>"
+            />
+        </div>
+        <div class="form-control">
+            <label class="label-text" for="image">image:</label>
+            <input
+                type="file"
+                name="image"
+                class="form-input"
+            />
+        </div>
+        <!-- <div class="form-control">
+            <label class="label-text" for="imageUrl">image url:</label>
+            <input
+                type="text"
+                name="imageUrl"
+                class="form-input <%= validationErrors.find(e => e.param === 'imageUrl') ? 'invalid' : '' %>"
+                value="<% if(edit || hasError) { %><%= product.imageUrl %><% } %>"
+            />
+        </div> -->
+        <div class="form-control">
+            <label class="label-text" for="price">price:</label>
+            <input
+                type="number"
+                name="price"
+                class="form-input <%= validationErrors.find(e => e.param === 'price') ? 'invalid' : '' %>"
+                step="0.01"
+                value="<% if(edit || hasError) { %><%= product.price %><% } %>"
+            />
+        </div>
+        <div class="form-control">
+            <label class="label-text" for="">description:</label>
+            <textarea
+                class="form-input <%= validationErrors.find(e => e.param === 'description') ? 'invalid' : '' %>"
+                rows="10"
+                name="description"
+            ><% if(edit || hasError) { %><%= product.description %><% } %></textarea>
+        </div>
+        <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+        <button type="submit" class="submit-button">
+            <% if(edit) { %>UPDATE PRODUCT<% } else { %>ADD PRODUCT<% } %>
+        </button>
+        <% if(edit) { %><input
+            type="hidden"
+            name="productId"
+            value="<%= product._id %>"
+        /><% } %>
+    </form>
+</main>
+<%- include('../includes/end.ejs') %>

@@ -1,0 +1,45 @@
+</head>
+<body>
+    <header class="header">
+        <nav class="nav-bar">
+            <div class="nav-bar-left">
+                <span class="nav-items <%= path === '/' ? 'active': '' %>">
+                    <a href="/">shop</a>
+                </span>
+                <span class="nav-items <%= path === '/products' ? 'active': '' %>">
+                    <a href="/products">products</a>
+                </span>
+                <% if (isLoggedIn) { %> 
+                <span class="nav-items <%= path === '/cart' ? 'active': '' %>">
+                    <a href="/cart">cart</a>
+                </span>
+                <span class="nav-items <%= path === '/orders' ? 'active': '' %>">
+                    <a href="/orders">orders</a>
+                </span>
+                <span class="nav-items <%= path === '/admin/add-product' ? 'active': '' %>">
+                    <a href="/admin/add-product">add product</a>
+                </span>
+                <span class="nav-items <%= path === '/admin/product-list' ? 'active': '' %>">
+                    <a href="/admin/product-list">admin</a>
+                </span>
+                <% } %>
+            </div>
+            <div class="nav-bar-right">
+                <% if (!isLoggedIn) { %> 
+                <span class="nav-items <%= path === '/login' ? 'active': '' %>">
+                    <a href="/login">login</a>
+                </span>
+                <span class="nav-items <%= path === '/signup' ? 'active': '' %>">
+                    <a href="/signup">sign up</a>
+                </span>
+                <% } else { %>
+                <span class="nav-items <%= path === '/logout' ? 'active': '' %>">
+                    <form action="/logout" method="post">
+                        <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                        <button class="link" type="submit">logout</button>
+                    </form>
+                </span>
+                <% } %>
+            </div>
+        </nav>
+    </header>

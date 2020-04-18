@@ -1,0 +1,19 @@
+extends layouts/main-layout.pug
+
+block styles
+    link(rel="stylesheet", href="/css/shop.css")
+block content
+    main
+        .product-container
+            if prods.length > 0
+                each product in prods
+                    .product-card
+                        span.product-title #{product.title}
+                        img(src="https://www.asme.org/getmedia/c2c8ea5a-b690-4ba7-92bb-34bd1432862b/book_guide_hero_books.png?width=300&height=315&ext=.png", alt="image not found")
+                        .product-price $14.99
+                        .product-description Read books, that's the only way to improve your quality as a human being!
+                        button.add-cart ADD TO CART
+            else
+                .title
+                    h1 no products found
+        

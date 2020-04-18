@@ -1,0 +1,30 @@
+<%- include('../includes/start.ejs') %>
+<link rel="stylesheet" href="/css/shop.css" />
+<%- include('../includes/navigation.ejs') %>
+<main>
+    <div class="product-container">
+        <% if (prods.length > 0) { %> <% for(let product of prods) { %>
+        <div class="product-card">
+            <span class="product-title"><%= product.title %></span>
+            <img src="<%= product.imageUrl %>" alt="" />
+            <div class="product-price">Rs.<%= product.price %></div>
+            <div class="button-container">
+                <a href="/products/<%= product._id %>" class="action-btn btn"
+                    >DETAILS</a
+                >
+                <% if (isLoggedIn) { %> <%-
+                include('../includes/post-to-cart.ejs', {product: product}) %>
+                <% } %>
+            </div>
+        </div>
+        <% } %>
+    </div>
+    <%- include('../includes/pagination.ejs', {currentPage: currentPage,
+    previousPage: previousPage, nextPage: nextPage, lastPage: lastPage,
+    hasNextPage: hasNextPage, hasPreviousPage: hasPreviousPage }) %> <% } else { %>
+    <div class="title">
+        <h1>no products found</h1>
+    </div>
+    <% } %>
+</main>
+<%- include('../includes/end.ejs') %>

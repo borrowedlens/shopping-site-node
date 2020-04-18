@@ -1,0 +1,21 @@
+<main>
+    <div class="product-container">
+        {{#if hasProducts}}
+        {{#each prods}}
+        <div class="product-card">
+            <span class="product-title">{{this.title}}</span>
+            <img src="https://www.asme.org/getmedia/c2c8ea5a-b690-4ba7-92bb-34bd1432862b/book_guide_hero_books.png?width=300&height=315&ext=.png"
+                alt="">
+            <div class="product-price">$14.99</div>
+            <div class="product-description">Read books, that's the only way to improve your quality as a human
+                being!</div>
+            <button class="add-cart">ADD TO CART</button>
+        </div>
+        {{/each}}
+        {{else}}
+        <div class="title">
+            <h1>no products found</h1>
+        </div>
+        {{/if}}
+    </div>
+</main>
